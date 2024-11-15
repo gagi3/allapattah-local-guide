@@ -40,7 +40,7 @@ function HeaderNavBar({ lsdOpen, setLsdOpen, setOpenCategory }) {
                             </a>
                     }
                 </div>
-                <div style={{ filter: 'drop-shadow(rgba(0,0,0,0.7) 0px 0px 10px)', margin: 0 }}>
+                <div style={{ filter: 'drop-shadow(rgba(0,0,0,0.7) 0px 0px 10px)', margin: 0, opacity: '0.8' }}>
                     <a
                         href="#"
                         target="_new"

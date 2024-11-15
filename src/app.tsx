@@ -12,8 +12,7 @@ import { NAVIGATION_CATEGORIES } from './navigation-categories';
 import { MARKERS } from './markers';
 import { allapattahPlaces } from './AllapattahPlaces';
 
-const API_KEY = 
-globalThis.GOOGLE_MAPS_API_KEY ?? (process.env.GOOGLE_MAPS_API_KEY as string);
+const API_KEY = process.env.GOOGLE_MAPS_API_KEY;
 
 const App = () => {
   const [lsdOpen, setLsdOpen] = useState(false);
@@ -23,8 +22,8 @@ const App = () => {
   return (
     <APIProvider apiKey={API_KEY}>
       <Map
-        // mapId={'bf51a910020fa25a'}
-        mapId={'1_896KkEiYyLFlyEcD8W9dF1L2Wsugkw'}
+        mapId={'bf51a910020fa25a'}
+        // mapId={'1_896KkEiYyLFlyEcD8W9dF1L2Wsugkw'}
         defaultZoom={15}
         defaultCenter={{ lat: 25.7983, lng: -80.2330 }}
         gestureHandling={'greedy'}
