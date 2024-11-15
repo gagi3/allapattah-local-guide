@@ -22,7 +22,7 @@ function InfoCard({ openCategory, lsdOpen }) {
                         ? <img src={img} alt="Avatar" style={{ width: '100%' }} />
                         : <></>
                 }
-                <div className="container" style={{ margin: '0 10px', opacity: '0.8', padding: '10px 20px 0 20px' }}>
+                <div className="container" style={{ fontFamily: 'JosefinSans', fontWeight: '700', margin: '0 10px', opacity: '0.8', padding: '10px 20px 0 20px' }}>
                     <p>{category?.text}</p>
                 </div>
                 <img src={IMAGES.sponsor} alt="Avatar" style={{ width: '50%', alignSelf: 'center', paddingBottom: '15px' }} />

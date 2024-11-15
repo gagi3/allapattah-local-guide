@@ -16,7 +16,7 @@ function ControlPanel({ lsdOpen, setLsdOpen, setOpenCategory }) {
 
   return (
     <div className="control-panel" style={navStyling}>
-      <div style={{ filter: 'drop-shadow(rgba(0,0,0,0.7) 0px 0px 10px)', paddingRight: '50px', margin: 0, opacity: 0.9 }}>
+      <div style={{ paddingRight: '50px', paddingTop: '10px', margin: 0, opacity: 0.9 }}>
           <img src={alpLogo} height='100%' width='100%' />
       </div>
 

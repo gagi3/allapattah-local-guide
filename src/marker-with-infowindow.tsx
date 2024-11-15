@@ -47,7 +47,7 @@ export const MarkerWithInfowindow = ({ markerObject, activeMarkerKey, setActiveM
           maxWidth={500}
           onClose={() => {setInfowindowOpen(false); setActiveMarkerKey('')}}
           headerDisabled={true}
-          style={{ padding: '0 !important', display: 'block' }}
+          style={{ padding: '0 !important', display: 'block', fontFamily: 'JosefinSansMd' }}
           className="marker-card"
         >
           <style>
@@ -74,11 +74,11 @@ export const MarkerWithInfowindow = ({ markerObject, activeMarkerKey, setActiveM
 
 
             <div className="card-content" style={{ display: 'flex', padding: '10px', paddingTop: 0, gap: '50px', fontSize: '14px' }}>
-              <div className="card-content-left" style={{ paddingTop: '30px' }}>
+              <div className="card-content-left" style={{ paddingTop: '30px', width: '60%' }}>
                 <div className="details">
                   <h2 style={{ marginTop: '5px', marginBottom: '5px' }}>{markerObject.title}</h2>
                   <p style={{ marginTop: '5px', marginBottom: '5px' }}>{markerObject.phoneNumber}</p>
-                  <a style={{ marginTop: '5px', marginBottom: '5px', textDecoration: 'none', color: 'black' }} href={markerObject.url}>{markerObject.url}</a>
+                  <a style={{ marginTop: '5px', marginBottom: '5px', textDecoration: 'none', color: 'black', display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }} href={markerObject.url}>{markerObject.url}</a>
                   <h3 style={{ marginTop: '5px', marginBottom: '5px' }}>{markerObject.address} <BsSignTurnRight style={{ fontSize: '18px', strokeWidth: 0.4 }} /></h3>
                 </div>
               </div>
