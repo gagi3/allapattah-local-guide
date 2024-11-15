@@ -35,27 +35,20 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        working-directory: ./website
+        working-directory: ./
         run: npm ci
 
       - name: Build website
-        working-directory: ./website
+        working-directory: ./
         run: |
           npm run build
         env:
           GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
 
-      - name: Find and Replace - Examples API Key
-        working-directory: ./website/build
-        run: |
-          sed -i -e "s,process\.env\.GOOGLE_MAPS_API_KEY,\"${GOOGLE_MAPS_API_KEY_EXAMPLES}\",g" scripts/examples.js
-        env:
-          GOOGLE_MAPS_API_KEY_EXAMPLES: ${{ secrets.GOOGLE_MAPS_API_KEY_EXAMPLES }}
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./website/build
+          path: ./dist
 
   # Deployment job
   deploy:
