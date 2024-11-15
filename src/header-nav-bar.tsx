@@ -14,6 +14,7 @@ function HeaderNavBar({ lsdOpen, setLsdOpen, setOpenCategory }) {
             alignItems: 'center',
             gap: '10px',
             fontStyle: 'italic',
+            fontSize: '11px',
             width: isLeftBtn ? '330px' : '220px',
             justifyContent: 'center',
             clipPath: isLeftBtn ? 'polygon(0% 0%, 100% 0%, 96% 100%, 2% 100%)' : 'polygon(5% 0%, 100% 0%, 96% 100%, 0% 100%)',
@@ -22,8 +23,8 @@ function HeaderNavBar({ lsdOpen, setLsdOpen, setOpenCategory }) {
         };
     };
     return (
-        <div className="header">
-            <div className="links" style={{ height: '62px', marginTop: 'unset' }}>
+        <div className="header" style={{ position: 'absolute', left: '480px', top: 0 }}>
+            <div className="links" style={{ height: '62px', marginTop: 'unset', display: 'flex' }}>
                 <div style={{ filter: 'drop-shadow(rgba(0,0,0,0.7) 0px 0px 10px)', margin: 0, opacity: '0.8' }}>
                     {
                         lsdOpen
