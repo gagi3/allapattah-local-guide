@@ -1,5 +1,6 @@
 {
   "type": "module",
+  "homepage": "https://gagi3.github.io/allapattah-local-guide/",
   "dependencies": {
     "@vis.gl/react-google-maps": "latest",
     "react": "^18.2.0",
