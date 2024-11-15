@@ -15,7 +15,7 @@ export const MarkerWithInfowindow = ({ markerObject, activeMarkerKey, setActiveM
 
   const stars = [];
   for (let i = 1; i <= 5; i++) {
-    let isFullStar = i < markerObject.rating;
+    let isFullStar = i <= markerObject.rating;
     let starStyle = {
       color: isFullStar ? 'yellow' : 'white',
       stroke: 'black',
@@ -102,7 +102,7 @@ export const MarkerWithInfowindow = ({ markerObject, activeMarkerKey, setActiveM
                   gap: '5px',
                   flexDirection: 'row'
                 }}>
-                  <span style={{ fontSize: '16px', fontWeight: '700' }}>4.2</span>
+                  <span style={{ fontSize: '16px', fontWeight: '700' }}>{markerObject.rating}</span>
                   {stars}
                 </div>
 
