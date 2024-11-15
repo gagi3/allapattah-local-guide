@@ -79,7 +79,7 @@ export const MarkerWithInfowindow = ({ markerObject, activeMarkerKey, setActiveM
                 <div className="details">
                   <h2 style={{ marginTop: '5px', marginBottom: '5px' }}>{markerObject.title}</h2>
                   <p style={{ marginTop: '5px', marginBottom: '5px' }}>{markerObject.phoneNumber}</p>
-                  <a style={{ marginTop: '5px', marginBottom: '5px', textDecoration: 'none', color: 'black', display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }} href={markerObject.url}>{markerObject.url}</a>
+                  <a target="_blank" style={{ marginTop: '5px', marginBottom: '5px', textDecoration: 'none', color: 'black', display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }} href={markerObject.url}>{markerObject.url}</a>
                   <h3 style={{ marginTop: '5px', marginBottom: '5px' }}>{markerObject.address} <BsSignTurnRight style={{ fontSize: '18px', strokeWidth: 0.4 }} /></h3>
                 </div>
               </div>
