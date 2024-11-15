@@ -17,7 +17,8 @@ function HeaderNavBar({ lsdOpen, setLsdOpen, setOpenCategory }) {
             width: isLeftBtn ? '330px' : '220px',
             justifyContent: 'center',
             clipPath: isLeftBtn ? 'polygon(0% 0%, 100% 0%, 96% 100%, 2% 100%)' : 'polygon(5% 0%, 100% 0%, 96% 100%, 0% 100%)',
-            height: '100%'
+            height: '100%',
+            pointerEvents: isLeftBtn ? 'all' : 'none'
         };
     };
     return (

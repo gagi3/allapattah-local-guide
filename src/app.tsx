@@ -18,7 +18,7 @@ const App = () => {
   const [lsdOpen, setLsdOpen] = useState(false);
   const [openCategory, setOpenCategory] = useState(`default${lsdOpen ? '_lsg' : ''}`);
   const [ activeMarkerKey, setActiveMarkerKey ] = useState('');
-  var latLngBounds = {latLngBounds: {north: 25.82207, south: 25.77402, east: -80.20567, west: -80.26022}}
+  var latLngBounds = {latLngBounds: {north: 25.9, south: 25.67, east: -80.016, west: -80.41}, strictBounds: false}
   return (
     <APIProvider apiKey={API_KEY}>
       <Map
@@ -28,14 +28,14 @@ const App = () => {
         defaultCenter={{ lat: 25.7983, lng: -80.2330 }}
         gestureHandling={'greedy'}
         disableDefaultUI={true}
+        zoomControl={true}
         restriction={latLngBounds}
-        // defaultBounds={latLngBounds.latLngBounds}
-        minZoom={15}
+        minZoom={10}
       >
         {
           lsdOpen
-            ? <Polygon strokeWeight={1.5} encodedPaths={POLYGONS.LITTLE_SANTO_DOMINGO} />
-            : <Polygon strokeWeight={4} strokeColor={'red'} fillOpacity={0} encodedPaths={POLYGONS.MODERN_ALLAPATTAH} />
+            ? <Polygon strokeOpacity={0.4} strokeWeight={1.5} strokeColor={'red'} encodedPaths={POLYGONS.LITTLE_SANTO_DOMINGO} />
+            : <Polygon strokeOpacity={0.4} strokeWeight={4} strokeColor={'blue'} fillOpacity={0} encodedPaths={POLYGONS.MODERN_ALLAPATTAH} />
         }
 
 

@@ -47,6 +47,7 @@ export const MarkerWithInfowindow = ({ markerObject, activeMarkerKey, setActiveM
           maxWidth={500}
           onClose={() => {setInfowindowOpen(false); setActiveMarkerKey('')}}
           headerDisabled={true}
+          shouldFocus={true}
           style={{ padding: '0 !important', display: 'block', fontFamily: 'JosefinSansMd' }}
           className="marker-card"
         >

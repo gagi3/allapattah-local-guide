@@ -16,7 +16,7 @@ function ControlPanel({ lsdOpen, setLsdOpen, setOpenCategory }) {
 
   return (
     <div className="control-panel" style={navStyling}>
-      <div style={{ paddingRight: '50px', paddingTop: '10px', margin: 0, opacity: 0.9 }}>
+      <div onClick={ () => window.location.reload() } style={{ paddingRight: '50px', paddingTop: '10px', margin: 0, opacity: 0.9 }}>
           <img src={alpLogo} height='100%' width='100%' />
       </div>
 
