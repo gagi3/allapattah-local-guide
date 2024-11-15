@@ -2,6 +2,7 @@ import React, { useState, Image } from 'react';
 import { BsStarFill, BsXCircle, BsSignTurnRight } from 'react-icons/bs';
 import logo from './assets/images/lsd.png';
 import openSign from './assets/images/open-sign.png'
+import placeholder from './assets/images/no-image-placeholder.png'
 import {
   AdvancedMarker,
   InfoWindow,
@@ -66,7 +67,7 @@ export const MarkerWithInfowindow = ({ markerObject, activeMarkerKey, setActiveM
             </div>
 
             <div className="card-header">
-              <img src={markerObject.image} width="100%" height="180px" style={{ objectFit: 'cover' }} alt={markerObject.title} />
+              <img src={markerObject.image || placeholder} width="100%" height="250px" style={{ objectFit: 'cover' }} alt={markerObject.title} />
               <img src={logo} style={{ top: '10px', left: '10px', position: 'absolute', display: markerObject.isLittleSantoDomingo ? 'block' : 'none' }} />
               <div style={{ top: '10px', right: '10px', position: 'absolute' }} onClick={() => setInfowindowOpen(false)}>
                 <BsXCircle style={{ background: 'white', borderRadius: '50%' }} />
