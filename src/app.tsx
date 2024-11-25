@@ -60,6 +60,7 @@ const App = () => {
         zoomControl={true}
         restriction={latLngBounds}
         minZoom={10}
+        onClick={() => {setActiveMarkerKey('')}}
       >
         <MapBoundaryLine isLittleSantoDomingo={lsdOpen} />
 
