@@ -12,13 +12,14 @@ import axios from 'axios';
 import { allapattahPlacesFallback } from './AllapattahPlaces';
 
 const API_KEY = process.env.GOOGLE_MAPS_API_KEY;
+const ALLAPATTAH_LOCAL_GUIDE_SERVER_URL = process.env.ALLAPATTAH_LOCAL_GUIDE_SERVER_URL;
 
 const App = () => {
   const [lsdOpen, setLsdOpen] = useState(false);
   const [openCategory, setOpenCategory] = useState(`default${lsdOpen ? '_lsg' : ''}`);
   const [allapattahPlaces, setAllapattahPlaces] = useState([]);
   if (!allapattahPlaces.length) {
-    axios.get('https://container-service-1.5rp0ncja7r49c.eu-west-1.cs.amazonlightsail.com/categories/places-new')
+    axios.get(`${ALLAPATTAH_LOCAL_GUIDE_SERVER_URL}categories/places-new`)
       .then((res) => {
         setAllapattahPlaces(res.data);
       })

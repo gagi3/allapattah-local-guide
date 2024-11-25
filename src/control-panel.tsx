@@ -4,11 +4,12 @@ import alpLogo from './assets/images/alp-logo-a-cdc.png';
 import { IMAGES } from './images';
 import ALGService from './services/alg.service';
 import axios from 'axios';
+const ALLAPATTAH_LOCAL_GUIDE_SERVER_URL = process.env.ALLAPATTAH_LOCAL_GUIDE_SERVER_URL;
 
 function ControlPanel({ lsdOpen, setLsdOpen, setOpenCategory }) {
   const [weather, setWeather] = useState({ isEmpty: true });
   if (weather.isEmpty) {
-    axios.get("https://container-service-1.5rp0ncja7r49c.eu-west-1.cs.amazonlightsail.com/weather/current")
+    axios.get(`${ALLAPATTAH_LOCAL_GUIDE_SERVER_URL}/weather/current`)
       .then((res) => {
         setWeather(res.data.data);
       })
