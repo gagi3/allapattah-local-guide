@@ -4,21 +4,49 @@ import { createRoot } from 'react-dom/client';
 import { APIProvider, Map } from '@vis.gl/react-google-maps';
 import ControlPanel from './control-panel';
 import NavMenu from './nav-menu';
-import { MarkerWithInfowindow } from './marker-with-infowindow';
-import BottomBanner from './bottom-banner';
-import { POLYGONS } from './encoded-polygon-data';
-import { Circle, Polygon, Polyline } from './components';
-import { NAVIGATION_CATEGORIES } from './navigation-categories';
-import { MARKERS } from './markers';
-import { allapattahPlaces } from './AllapattahPlaces';
+import MarkerWithInfowindow from './marker-with-infowindow';
+import NotificationBar from './notification-bar';
+import MapBoundaryLine from './components/MapBoundaryLine';
+import ALGService from './services/alg.service';
+import axios from 'axios';
+import { allapattahPlacesFallback } from './AllapattahPlaces';
 
 const API_KEY = process.env.GOOGLE_MAPS_API_KEY;
 
 const App = () => {
   const [lsdOpen, setLsdOpen] = useState(false);
   const [openCategory, setOpenCategory] = useState(`default${lsdOpen ? '_lsg' : ''}`);
-  const [ activeMarkerKey, setActiveMarkerKey ] = useState('');
-  var latLngBounds = {latLngBounds: {north: 25.9, south: 25.67, east: -80.016, west: -80.41}, strictBounds: false}
+  const [allapattahPlaces, setAllapattahPlaces] = useState([]);
+  if (!allapattahPlaces.length) {
+    axios.get('https://container-service-1.5rp0ncja7r49c.eu-west-1.cs.amazonlightsail.com/categories/places-new')
+      .then((res) => {
+        setAllapattahPlaces(res.data);
+      })
+      .catch(() => {
+        setAllapattahPlaces(allapattahPlacesFallback);
+      });
+  }
+  const notificationBars = {
+    alertNotificationBar: {
+      category: 'alert',
+      title: 'SOME TITLE',
+      content: 'Some Content • Other Content',
+    },
+    infoNotificationBar: {
+      category: 'info',
+      title: 'ALLAPATTAH: EL NUESTRAS PALABRAS',
+      content: 'A documentary About Allapattah • Watch Now'
+    },
+    warningNotificationBar: {
+      category: 'warning',
+      title: 'INTELIGENCIA ARTIFICIAL PARA PEQUENAS EMPRESAS',
+      content: '04/12/24 2:30 PM • CONVERGE MIAMI • REGISTRATE AHORA'
+    }
+  }
+  const [activeMarkerKey, setActiveMarkerKey] = useState('');
+  const [notificationBarOpen, setNotificationBarOpen] = useState(true);
+  var latLngBounds = { latLngBounds: { north: 25.9, south: 25.67, east: -80.016, west: -80.41 }, strictBounds: false }
+
   return (
     <APIProvider apiKey={API_KEY}>
       <Map
@@ -32,11 +60,7 @@ const App = () => {
         restriction={latLngBounds}
         minZoom={10}
       >
-        {
-          lsdOpen
-            ? <Polygon strokeOpacity={0.4} strokeWeight={1.5} strokeColor={'red'} encodedPaths={POLYGONS.LITTLE_SANTO_DOMINGO} />
-            : <Polygon strokeOpacity={0.4} strokeWeight={4} strokeColor={'blue'} fillOpacity={0} encodedPaths={POLYGONS.MODERN_ALLAPATTAH} />
-        }
+        <MapBoundaryLine isLittleSantoDomingo={lsdOpen} />
 
 
         {allapattahPlaces.filter((marker) => {
@@ -48,12 +72,12 @@ const App = () => {
           }
           return true;
         }).map((marker) => {
-          return (<MarkerWithInfowindow markerObject={marker} activeMarkerKey={activeMarkerKey} setActiveMarkerKey = {setActiveMarkerKey} />)
+          return (<MarkerWithInfowindow markerObject={marker} activeMarkerKey={activeMarkerKey} setActiveMarkerKey={setActiveMarkerKey} />)
         })}
       </Map>
       <ControlPanel lsdOpen={lsdOpen} setLsdOpen={setLsdOpen} setOpenCategory={setOpenCategory} />
       <NavMenu lsdOpen={lsdOpen} openCategory={openCategory} setOpenCategory={setOpenCategory} />
-      {/* <BottomBanner /> */}
+      {/* <NotificationBar notificationBarOpen={notificationBarOpen} setNotificationBarOpen={setNotificationBarOpen} notificationBar={notificationBars.warningNotificationBar} /> */}
     </APIProvider>);
 };
 export default App;

@@ -1,16 +1,19 @@
 import React, { useState, Image } from 'react';
-import { BsStarFill, BsXCircle, BsSignTurnRight } from 'react-icons/bs';
-import logo from './assets/images/lsd.png';
-import openSign from './assets/images/open-sign.png'
+import { BsStarFill, } from 'react-icons/bs';
 import placeholder from './assets/images/no-image-placeholder.png'
 import {
   AdvancedMarker,
   InfoWindow,
   useAdvancedMarkerRef,
-  Pin
+  Pin,
+  Marker
 } from '@vis.gl/react-google-maps';
+import CloseIcon from './components/CloseIcon';
+import OpenSignIcon from './components/OpenSignIcon';
+import LsdBadgeIcon from './components/LsdBadgeIcon';
+import DirectionsIcon from './components/DirectionsIcon';
 
-export const MarkerWithInfowindow = ({ markerObject, activeMarkerKey, setActiveMarkerKey }) => {
+const MarkerWithInfowindow = ({ markerObject, activeMarkerKey, setActiveMarkerKey }) => {
   const [infowindowOpen, setInfowindowOpen] = useState(false);
   const [markerRef, marker] = useAdvancedMarkerRef();
 
@@ -34,7 +37,7 @@ export const MarkerWithInfowindow = ({ markerObject, activeMarkerKey, setActiveM
       <AdvancedMarker
         ref={markerRef}
         key={markerObject.placeId}
-        onClick={() => {setInfowindowOpen(true); setActiveMarkerKey(markerObject.placeId)}}
+        onClick={() => { setInfowindowOpen(true); setActiveMarkerKey(markerObject.placeId) }}
         position={{ lat: markerObject.coordinates.lat, lng: markerObject.coordinates.lng }}
         title={markerObject.title}>
         <Pin
@@ -46,7 +49,7 @@ export const MarkerWithInfowindow = ({ markerObject, activeMarkerKey, setActiveM
         <InfoWindow
           anchor={marker}
           maxWidth={500}
-          onClose={() => {setInfowindowOpen(false); setActiveMarkerKey('')}}
+          onClose={() => { setInfowindowOpen(false); setActiveMarkerKey('') }}
           headerDisabled={true}
           shouldFocus={true}
           style={{ padding: '0 !important', display: 'block', fontFamily: 'JosefinSansMd' }}
@@ -56,51 +59,50 @@ export const MarkerWithInfowindow = ({ markerObject, activeMarkerKey, setActiveM
             {
               `
                 .gm-style-iw { padding: 0 !important; }
-                .gm-style-iw-d { overflow: auto !important }
+                .gm-style-iw-d { overflow: auto !important; overflow: hidden !important; }
+                .gm-style-iw-c { max-width: 325px !important; max-height: 300px !important; }
               `
             }
           </style>
 
           <div className="card">
-            <div className="flag-icon" style={{ display: 'none' }}>
-              <img src="flag-icon.png" alt="Dominican Flag" />
-            </div>
-
             <div className="card-header">
-              <img src={markerObject.image || placeholder} width="100%" height="250px" style={{ objectFit: 'cover' }} alt={markerObject.title} />
-              <img src={logo} style={{ top: '10px', left: '10px', position: 'absolute', display: markerObject.isLittleSantoDomingo ? 'block' : 'none' }} />
+              <img src={markerObject.image || placeholder} width="100%" height="175px" style={{ objectFit: 'cover' }} alt={markerObject.title} />
+              {
+                markerObject.isLittleSantoDomingo && <LsdBadgeIcon height='40' width='25' style={{ position: 'absolute', top: '10', left: '10' }} />
+              }
               <div style={{ top: '10px', right: '10px', position: 'absolute' }} onClick={() => setInfowindowOpen(false)}>
-                <BsXCircle style={{ background: 'white', borderRadius: '50%' }} />
+                <CloseIcon hw='13' />
               </div>
             </div>
 
 
-            <div className="card-content" style={{ display: 'flex', padding: '10px', paddingTop: 0, gap: '50px', fontSize: '14px' }}>
-              <div className="card-content-left" style={{ paddingTop: '30px', width: '60%' }}>
+            <div className="card-content" style={{ display: 'flex', padding: '10px', paddingTop: 0, gap: '20px', fontSize: '12px' }}>
+              <div className="card-content-left" style={{ paddingTop: '10px', width: '60%' }}>
                 <div className="details">
-                  <h2 style={{ marginTop: '5px', marginBottom: '5px' }}>{markerObject.title}</h2>
+                  <h3 style={{ marginTop: '5px', marginBottom: '5px' }}>{markerObject.title}</h3>
                   <p style={{ marginTop: '5px', marginBottom: '5px' }}>{markerObject.phoneNumber}</p>
-                  <a target="_blank" style={{ marginTop: '5px', marginBottom: '5px', textDecoration: 'none', color: 'black', display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }} href={markerObject.url}>{markerObject.url}</a>
-                  <h3 style={{ marginTop: '5px', marginBottom: '5px' }}>{markerObject.address} <BsSignTurnRight style={{ fontSize: '18px', strokeWidth: 0.4 }} /></h3>
+                  <a target="_blank" rel="noreferrer" style={{ marginTop: '5px', marginBottom: '5px', textDecoration: 'none', color: 'black', display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }} href={markerObject.url}>{markerObject.url}</a>
+                  <h4 style={{ marginTop: '5px', marginBottom: '5px' }}>{markerObject.address} <DirectionsIcon hw='16' /></h4>
                 </div>
               </div>
 
               <div className="card-content-right" style={{
                 display: 'flex',
                 alignContent: 'center',
-                justifyContent: 'center',
+                justifyContent: 'flex-start',
                 alignItems: 'center',
                 flexWrap: 'nowrap',
                 flexDirection: 'column'
               }}>
-                <p style={{ color: 'grey', fontSize: '10px' }}>Details from Google Maps</p>
+                <p style={{ color: 'grey', fontSize: '8px', fontStyle: 'italic', marginTop: 0 }}>Details from Google Maps</p>
                 <div className="rating" style={{
                   display: 'flex',
                   alignContent: 'center',
                   justifyContent: 'space-between',
                   alignItems: 'center',
                   flexWrap: 'nowrap',
-                  gap: '5px',
+                  gap: '3px',
                   flexDirection: 'row'
                 }}>
                   <span style={{ fontSize: '16px', fontWeight: '700' }}>{markerObject.rating}</span>
@@ -108,11 +110,9 @@ export const MarkerWithInfowindow = ({ markerObject, activeMarkerKey, setActiveM
                 </div>
 
                 {
-                  markerObject.isOpen
-                    ? <div className="open-sign">
-                      <img width="80px" height="100%" src={openSign} />
-                    </div>
-                    : <></>
+                  markerObject.isOpen && <div className="open-sign" style={{ paddingTop: '15px' }}>
+                    <OpenSignIcon width='75' height='50' />
+                  </div>
                 }
 
               </div>
@@ -123,3 +123,5 @@ export const MarkerWithInfowindow = ({ markerObject, activeMarkerKey, setActiveM
     </>
   );
 };
+
+export default React.memo(MarkerWithInfowindow);

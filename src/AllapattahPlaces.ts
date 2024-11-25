@@ -1,4 +1,4 @@
-export const allapattahPlaces = [
+export const allapattahPlacesFallback = [
     {
         "placeId": "ChIJI_RC9Jqx2YgR1L1E2neW1KE",
         "coordinates": {

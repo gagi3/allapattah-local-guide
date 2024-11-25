@@ -12,11 +12,11 @@ function InfoCard({ openCategory, lsdOpen }) {
         : lsdOpen
             ? 'polygon(0% 1%, 40% 1.5%, 100% 0%, 100% 97%, 0% 100%)'
             : 'polygon(0% 3%, 95% 0%, 100% 3%, 100% 97%, 0% 100%)'
-
+    const setOpacityOnChild = true;
     return (
-        <div style={{ filter: 'drop-shadow(rgba(0,0,0,0.7) 0px 0px 10px)', margin: 0, opacity: 0.9 }}>
-            <div className="card" style={{ background: 'white', clipPath: polygon, display: 'flex', flexDirection: 'column', backgroundColor: 'white', width: lsdOpen ? '380px' : '300px', height: 'fit-content', margin: lsdOpen ? 0 : '0 20px' }}>
-                <h2 style={{ textTransform: 'uppercase', fontStyle: 'italic', backgroundColor: category?.color, color: 'white', marginBottom: 0, padding: '10px 20px', marginTop: '30px' }}><b>{category?.title}<br />{category?.subtitle}</b></h2>
+        <div className="card-container" style={{ filter: 'drop-shadow(rgba(0,0,0,0.7) 0px 0px 10px)', margin: 0, opacity: setOpacityOnChild ? 1 : 0.8 }}>
+            <div className="card" style={{ backgroundColor: setOpacityOnChild ? 'rgba(255, 255, 255, 0.9)' : 'white', clipPath: polygon, display: 'flex', flexDirection: 'column', width: lsdOpen ? '380px' : '300px', height: 'fit-content', margin: lsdOpen ? 0 : '0 20px' }}>
+                <h2 className="card-header" style={{ textTransform: 'uppercase', fontStyle: 'italic', backgroundColor: category?.color, color: 'white', marginBottom: 0, padding: '10px 20px', marginTop: '30px' }}><b>{category?.title}<br />{category?.subtitle}</b></h2>
                 {
                     img
                         ? <img src={img} alt="Avatar" style={{ width: '100%' }} />
@@ -25,7 +25,7 @@ function InfoCard({ openCategory, lsdOpen }) {
                 <div className="container" style={{ fontFamily: 'JosefinSans', fontWeight: '700', margin: '0 10px', opacity: '0.8', padding: '10px 20px 0 20px' }}>
                     <p>{category?.text}</p>
                 </div>
-                <img src={IMAGES.sponsor} alt="Avatar" style={{ width: '50%', alignSelf: 'center', paddingBottom: '15px' }} />
+                <img className="sponsor-image" src={IMAGES.sponsor} alt="Sponsor" style={{ width: '50%', alignSelf: 'center', paddingBottom: '15px' }} />
             </div>
         </div>
     );
